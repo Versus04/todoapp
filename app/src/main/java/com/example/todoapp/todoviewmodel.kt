@@ -1,25 +1,24 @@
 package com.example.todoapp
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import java.time.Instant
+import java.util.Date
 
 class todoviewmodel: ViewModel() {
- private var _todolist= MutableLiveData<List<data>>()
-    val todolist : LiveData<List<data>> = _todolist
-    init {
-        _todolist.value = todomanager.getalltodo()
-    }
+    val tododao = MainApplication.tododatabase.todoDao()
+
+    val todolist : LiveData<List<data>> = tododao.getalldata()
+
         fun getalltodo(){
-        _todolist.value=todomanager.getalltodo()
+        tododao.getalldata()
         }
 
         fun addtodo(title:String){
-            todomanager.addtodo(title)
+            tododao.addtodo(data(title = title, created = Date.from(Instant.now())))
         }
         fun deletetodo(id:Int){
-            todomanager.deletetodo(id)
-            todomanager.getalltodo()
+           tododao.deletetodo(id)
         }
 
 }
