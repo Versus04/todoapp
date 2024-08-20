@@ -14,7 +14,7 @@ abstract class tododatabase : RoomDatabase(){
 
 
     companion object{
-        const val NAME= "todo_db"
+         val NAME : String = "todo_db"
 
     }
 
